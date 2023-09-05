@@ -10,4 +10,10 @@ public class VideoPost extends Post{
         this.quality = quality;
         this.duration = duration;
     }
+
+    @Override
+    public String toString(){
+        return  "Fecha: " + this.getPostDate() + "Video: " + this.title + " Duración: " + this.duration
+                + " Calidad: " + this.quality;
+    }
 }

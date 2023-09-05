@@ -12,4 +12,22 @@ public class Comment {
         this.owner = owner;
         this.commentDate = LocalDate.now();
     }
+
+    public String getCommentText(){
+        return this.commentText;
+    }
+
+    public LocalDate getCommentDate(){
+        return this.commentDate;
+    }
+
+    public User getOwner(){
+        return this.owner;
+    }
+
+    @Override
+    public String toString(){
+        return "Usuario: " + this.getOwner().getName() + "Fecha: " + this.getCommentDate()
+                + " Comentario: " + this.getCommentText();
+    }
 }
