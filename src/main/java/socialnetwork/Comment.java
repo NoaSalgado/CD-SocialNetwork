@@ -27,7 +27,7 @@ public class Comment {
 
     @Override
     public String toString(){
-        return "Usuario: " + this.getOwner().getName() + "Fecha: " + this.getCommentDate()
+        return "Usuario: " + this.owner.getName() + "Fecha: " + this.commentDate
                 + " Comentario: " + this.getCommentText();
     }
 }

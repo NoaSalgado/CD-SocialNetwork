@@ -54,7 +54,7 @@ public class SocialNetwork {
     }
 
     public User getSingleUser() {
-            String username = Input.string("Introduce tu nombre de usuario: \n");
+            String username = Input.string();
             if(userExists(username)){
                 User currentUser = null;
                 for (User user : this.users) {

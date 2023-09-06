@@ -1,7 +1,5 @@
 package socialnetwork;
-
 import Util.Input;
-
 import java.util.*;
 
 public class User {
@@ -55,10 +53,6 @@ public class User {
     }
 
     public void selectPostType() {
-        System.out.println("Selecciona el tipo de post que quieres publicar: ");
-        System.out.println("1 - Texto");
-        System.out.println("2 - Imagen");
-        System.out.println("3 - Video");
         char postType = Input.character();
         switch (postType) {
             case '1':
@@ -71,7 +65,7 @@ public class User {
                 addVideoPost();
                 break;
             default:
-                System.out.println("Opción incorrecta");
+                showMessage("Opción incorrecta");
                 selectPostType();
         }
     }
@@ -98,10 +92,6 @@ public class User {
     }
 
     public void deletePost() {
-        System.out.println("Indica el número del post que deseas eliminar");
-        for (int i = 0; i < this.postsPublished.size(); i++) {
-            System.out.println(i + " - " + this.postsPublished.get(i));
-        }
         Post postToDelete = this.postsPublished.get(Input.integer());
         if (!postToDelete.equals(null)) {
             this.postsPublished.remove(postToDelete);
@@ -113,6 +103,12 @@ public class User {
         }
     }
 
+    public void printUserPublishedPosts() {
+        for (int i = 0; i < this.postsPublished.size(); i++) {
+            System.out.println(i + " - " + this.postsPublished.get(i));
+        }
+    }
+
     public void printUserPublishedPosts(User user) {
         for (int i = 0; i < user.postsPublished.size(); i++) {
             System.out.println(i + " - " + user.postsPublished.get(i));
@@ -120,7 +116,6 @@ public class User {
     }
 
     public void commentPost(User user) {
-        System.out.println("Indica el número de post que deseas comentar: ");
         printUserPublishedPosts(user);
         Post postToComment = user.postsPublished.get(Input.integer());
         if (!postToComment.equals(null)) {
@@ -147,16 +142,19 @@ public class User {
         return userComments;
     }
     public void printUserComments () {
-        for (int i = 0; i < getUserComments().size(); i++){
-            System.out.println(i + " - " +
-                    getUserComments().get(i));
+        if(!getUserComments().isEmpty()){
+            for (int i = 0; i < getUserComments().size(); i++){
+                System.out.println(i + " - " +
+                        getUserComments().get(i));
+            }
+        }else{
+            showMessage("Todavía no has realizado ningún comentario");
         }
     }
 
     public void deleteUserComment(){
-        List<Comment> userComments = getUserComments();
-        System.out.println("Indica el número del comentario que quieres eliminar: ");
         printUserComments();
+        List<Comment> userComments = getUserComments();
         Comment commentToDelete = userComments.get(Input.integer());
         if(!commentToDelete.equals(null)){
             for(User user: this.usersFollowing){
