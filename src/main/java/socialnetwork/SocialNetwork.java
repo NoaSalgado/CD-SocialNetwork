@@ -3,7 +3,9 @@ package socialnetwork;
 import Util.Input;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SocialNetwork {
     private List<User> users;
@@ -13,6 +15,9 @@ public class SocialNetwork {
     }
     public SocialNetwork(){
         this.users = new ArrayList<>();
+        this.users.add(new User("noa"));
+        this.users.add(new User("maria"));
+        this.users.add(new User("juan"));
     }
 
     public void addNewUser(){
@@ -63,6 +68,35 @@ public class SocialNetwork {
                 return null;
             }
     }
+
+    public void suggestFriends(User user){
+        List<User> suggestedFriends = new ArrayList<>();
+        if(!user.getUsersFollowing().isEmpty()){
+            for(User u: this.getUsers()){
+                if(u.equals(user)){
+                    continue;
+                }
+                List<User> commonFriends = new ArrayList<>(this.getUsers());
+                commonFriends.retainAll(user.getUsersFollowing());
+                if(!commonFriends.isEmpty()){
+                    suggestedFriends.add(u);
+                }
+        }
+        }
+        suggestedFriends.removeAll(user.getUsersFollowing());
+        printSuggestedFriends(suggestedFriends);
+    }
+
+    private void printSuggestedFriends(List<User> suggestedFriends){
+        if(!suggestedFriends.isEmpty()){
+            showMessage("Gente a la que podrías conocer: ");
+            for(User u: suggestedFriends){
+                System.out.println(u.getName());
+            }
+        }
+    }
+
+
     private void showMessage(String message){
         System.out.println(message);
     }
